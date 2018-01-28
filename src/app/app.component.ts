@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
     // setTimeout(() => this.store.dispatch(new fromUser.UserAddAction(u3)), 1200);
     // setTimeout(() => this.store.dispatch(new fromUser.UserSelectAction(2)), 1300);
     // setTimeout(() => this.store.dispatch(new fromUser.UserDeleteAction(1)), 2000);
-    // temp
+    // temps
 
     Observable
       .fromEvent(this.search.nativeElement, 'keyup')
