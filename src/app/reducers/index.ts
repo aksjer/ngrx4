@@ -14,6 +14,7 @@ export const reducers = {
   user: fromUser.reducer
 };
 
+
 export const getLayoutState = createFeatureSelector<fromLayout.State>('layout');
 export const getSidenavState = createSelector(getLayoutState, fromLayout.getSidenavState);
 
@@ -23,7 +24,7 @@ export const {
   selectEntities: getUserEntities,
   selectAll: getAllUsers,
   selectTotal: getTotalUsers
-} = fromUser.adapter.getSelectors(getUserState);
+} = fromUser.adapter.getSelectors<State>(getUserState);
 export const getSelectedUserId = createSelector(getUserState, fromUser.getSelectedUserId);
 export const getSearchIds = createSelector(getUserState, fromUser.getSearchIds);
 export const getSearchResult = createSelector(getUserEntities, getSearchIds,

@@ -20,8 +20,10 @@ const initialState: State = adapter.getInitialState({
 
 export const reducer = (state: State = initialState, action: fromUser.Actions): State => {
   switch (action.type) {
-    case fromUser.ADD:
+    case fromUser.ADD_SUCCESS:
       return { ...adapter.addOne(action.payload, state) };
+    case fromUser.ADD_MANY_SUCCESS:
+      return { ...adapter.addMany(action.payload, state) };
     case fromUser.SELECT:
       return { ...state, selectedUserId: action.payload };
     case fromUser.DELETE:

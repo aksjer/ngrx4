@@ -2,6 +2,9 @@ import { Action } from '@ngrx/store';
 import { User } from '../models/user';
 
 export const ADD = '[User] Add';
+export const ADD_SUCCESS = '[User] Add Success';
+export const ADD_MANY = '[User] Add Many';
+export const ADD_MANY_SUCCESS = '[User] Add Many Success';
 export const SELECT = '[User] Select';
 export const DELETE = '[User] Delete';
 export const SEARCH = '[User] Search';
@@ -11,6 +14,21 @@ export const LOAD = '[User] Load';
 export class UserAddAction implements Action {
   readonly type = ADD;
   constructor(public payload: User) { }
+}
+
+export class UserAddSuccessAction implements Action {
+  readonly type = ADD_SUCCESS;
+  constructor(public payload: User) { }
+}
+
+export class UserAddManyAction implements Action {
+  readonly type = ADD_MANY;
+  constructor(public payload: User[]) { }
+}
+
+export class UserAddManySuccessAction implements Action {
+  readonly type = ADD_MANY_SUCCESS;
+  constructor(public payload: User[]) { }
 }
 
 export class UserSelectAction implements Action {
@@ -39,6 +57,9 @@ export class UserLoadAction implements Action {
 }
 
 export type Actions = UserAddAction
+  | UserAddSuccessAction
+  | UserAddManyAction
+  | UserAddManySuccessAction
   | UserSelectAction
   | UserDeleteAction
   | UserSearchAction

@@ -7,6 +7,7 @@ import * as fromSidenav from './actions/sidenav';
 import * as fromUser from './actions/user';
 import 'rxjs/add/observable/fromEvent';
 import { tap, map, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { Dictionary } from '@ngrx/entity/src/models';
 
 @Component({
   selector: 'app-root',
@@ -16,10 +17,16 @@ import { tap, map, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 export class AppComponent implements OnInit {
 
   sidenav$: Observable<boolean>;
-  users$: Observable<any>;
+  users$: Observable<Dictionary<User>>;
   selectedUser$: Observable<any>;
   @ViewChild('search') search: ElementRef;
   searchResult$: Observable<User[]>;
+
+  users: User[] = [
+    { id: 1, name: 'bob', age: 15 },
+    { id: 2, name: 'marco', age: 24 },
+    { id: 3, name: 'jack', age: 36 }
+  ];
 
   constructor(
     private store: Store<fromRoot.State>
@@ -38,10 +45,10 @@ export class AppComponent implements OnInit {
     const u2: User = { id: 2, name: 'marco', age: 24 };
     const u3: User = { id: 3, name: 'jack', age: 36 };
 
-    setTimeout(() => this.store.dispatch(new fromUser.UserAddAction(u1)), 1000);
-    setTimeout(() => this.store.dispatch(new fromUser.UserAddAction(u2)), 1100);
-    setTimeout(() => this.store.dispatch(new fromUser.UserAddAction(u3)), 1200);
-    setTimeout(() => this.store.dispatch(new fromUser.UserSelectAction(2)), 1300);
+    // setTimeout(() => this.store.dispatch(new fromUser.UserAddAction(u1)), 1000);
+    // setTimeout(() => this.store.dispatch(new fromUser.UserAddAction(u2)), 1100);
+    // setTimeout(() => this.store.dispatch(new fromUser.UserAddAction(u3)), 1200);
+    // setTimeout(() => this.store.dispatch(new fromUser.UserSelectAction(2)), 1300);
     // setTimeout(() => this.store.dispatch(new fromUser.UserDeleteAction(1)), 2000);
 
     Observable
@@ -58,6 +65,8 @@ export class AppComponent implements OnInit {
     this.searchResult$ = this.store.select(fromRoot.getSearchResult);
 
     setTimeout(() => this.store.dispatch(new fromSidenav.SidenavCloseAction()), 2000);
+
+    this.store.dispatch(new fromUser.UserAddManyAction(this.users));
 
   }
 
